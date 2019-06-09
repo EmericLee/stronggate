@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  vpnpure:
+    image: emericlee\stronggate
+    hostname: pure
+    container_name: vpnpure
+    volumes: 
+      - /lib/modules:/lib/modules
+      - ./config:/etc/stronggate
+    privileged: true
+    cap_add: 
+      - ALL            #SYS_ADMIN
+    restart: always
+    ports:
+      - "20005:3128"   #http proxy(squid http)
+      - "20001:8388"   #Shadowsocks Server
+      - "20006:1080"   #socket proxy(Shadowscoks client to Local)
+    #entrypoint: /entrypoint.sh
