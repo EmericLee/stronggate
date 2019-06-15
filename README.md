@@ -7,12 +7,12 @@ By emericlee@gmail.com
 
 ## Quick EXAMPLE
 
-### 1.Run image manually
+### Example A.Run image manually with command shell
 Run image quickly and enter shell and start services manually by command line in container.
 
     docker run -it --rm --name vpnpure --privileged --cap-add ALL -v /lib/modules:/lib/modules  emericlee/stronggate sh
 
-### 2.Run image with full service
+### Example B.Run image manually with full service
 Modify the following command line as needed and run it.  `abspath-to-stronggate-config-files` is the directory for aggregation of config files , see `config files` .  
 
     docker run -it --rm --name vpnpure --privileged --cap-add ALL -v /lib/modules:/lib/modules \
@@ -22,7 +22,7 @@ Modify the following command line as needed and run it.  `abspath-to-stronggate-
            -v /abspath-to-stronggate-config-files/:/etc/stronggate \
            emericlee/stronggate
 
-### 3.docker-compose up
+### Example C Run image by docker-compose
 Create a compose file like below and up it.
 
     #example:docker-compose for stronggate
