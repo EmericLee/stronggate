@@ -3,7 +3,7 @@
 # Include Strongswan (As client to a vpn server) & squid(proxy for http) & shadowsocks(server for shadowsocks)
 #
 
-FROM shadowsocks/shadowsocks-libev 
+FROM v2ray/official  
 ## or alpine
 MAINTAINER emeric <kometo@gmail.com>
 
@@ -16,7 +16,6 @@ EXPOSE  8388 3128 1080
 
 RUN mkdir /var/spool/squid \
  && chown squid:squid /var/spool/squid \
- && mkdir -p /etc/shadowsocks-libev/ \
  && mkdir -p /var/lib/strongswan/ \
  && touch /var/lib/strongswan/ipsec.conf.inc
 
@@ -25,7 +24,7 @@ RUN ln -sf /etc/stronggate/ipsec.conf /etc/ipsec.conf \
  && ln -sf /etc/stronggate/ipsec.secrets /etc/ipsec.secrets \
  && ln -sf /etc/stronggate/cacerts/* /etc/ipsec.d/cacerts \
  && ln -sf /etc/stronggate/squid.conf /etc/squid/squid.conf \
- && ln -sf /etc/stronggate/shadowsocks.config.json /etc/shadowsocks-libev/config.json 
+ && ln -sf /etc/stronggate/v2ray.json /etc/v2ray/config.json
 
 COPY entrypoint.sh /
 COPY README.md /

@@ -14,6 +14,5 @@ services:
     restart: always
     ports:
       - "20005:3128"   #http proxy(squid http)
-      - "20001:8388"   #Shadowsocks Server
-      - "20006:1080"   #socket proxy(Shadowscoks client to Local)
+      - "10005:10005"   #v2ray Server
     #entrypoint: /entrypoint.sh
