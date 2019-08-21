@@ -12,8 +12,6 @@ USER root
 RUN set -xe \
     && apk add --no-cache strongswan squid
 
-EXPOSE  8388 3128 1080
-
 RUN mkdir /var/spool/squid \
  && chown squid:squid /var/spool/squid \
  && mkdir -p /var/lib/strongswan/ \
