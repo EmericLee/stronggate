@@ -1,26 +1,29 @@
 # stronggate
 
-A prxoy gate docker that provide http proxy(by squid) & socket proxy(by ss-local) & shadowsocks(by ss-server) services through a ikev2 vpn connection powered by strongswan.
+A prxoy gate docker that provide squid http proxy & v2ray Server through a ikev2 vpn connection powered by strongswan.
 
 By emericlee@gmail.com
 
 
 ## Quick EXAMPLE
 
-### Example A.Run image manually with command shell
-Run image quickly and enter shell and start services manually by command line in container.
+### Example A.Run image manually and enter command shell
 
     docker run -it --rm --name vpnpure --privileged --cap-add ALL -v /lib/modules:/lib/modules  emericlee/stronggate sh
 
 ### Example B.Run image manually with full service
 Modify the following command line as needed and run it.  `abspath-to-stronggate-config-files` is the directory for aggregation of config files , see `config files` .  
 
-    docker run -it --rm --name vpnpure --privileged --cap-add ALL -v /lib/modules:/lib/modules \
-           -p 20005:3128 \
-           -p 20006:1080 \
-           -p 20001:8388 \
-           -v /abspath-to-stronggate-config-files/:/etc/stronggate \
-           emericlee/stronggate
+    docker run -dt \
+        --restart unless-stopped \
+        --name vpnpure \
+        --privileged \
+        --cap-add ALL \
+        -v /lib/modules:/lib/modules \
+        -p 20005:3128 \
+        -p 10005:10005 \
+        -v /abspath-to-stronggate-config-files:/etc/stronggate \
+        emericlee/stronggate
 
 ### Example C Run image by docker-compose
 Create a compose file like below and up it.
@@ -42,8 +45,7 @@ Create a compose file like below and up it.
         restart: always
         ports:
           - "20005:3128"   #squid http proxy
-          - "20001:8388"   #Shadowsocks Server
-          - "20006:1080"   #sShadowscoks local port for socket proxy
+          - "20006:1080"   #v2ray Server
         #entrypoint: /entrypoint.sh         #can overwrite by you own entry script
 
 
@@ -54,8 +56,7 @@ The follow port should publish as needed.
 
     ports:
     - "xxxx:3128"   #http proxy(squid http)
-    - "xxxx:8388"   #Shadowsocks Server
-    - "xxxx:1080"   #socket proxy(Shadowscoks client to Local)
+    - "xxxx:1080"   #v2ray Server
 
 ### Config files
 The follow files are config files for strongswan & squid & shadowsocks. They was aggregated at /etc/stronggate in container and map(link) to the location where each service will load by default . 
@@ -66,4 +67,4 @@ Each profile can be edited according to the corresponding documentation.You can 
     /etc/stronggate/ipsec.secrets               /etc/ipsec.secrets
     /etc/stronggate/cacerts/*                    /etc/ipsec.d/cacerts/*
     /etc/stronggate/squid.conf                  /etc/squid/squid.conf
-    /etc/stronggate/shadowsocks.config.json     /etc/shadowsocks-libev/config.json
+    /etc/stronggate/v2ray.json                  /etc/v2ray/config.json
