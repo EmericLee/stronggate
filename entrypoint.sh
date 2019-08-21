@@ -39,7 +39,7 @@ then
     squid -d 1
 
     #Start v2ray config /etc/v2ray/config.json
-    v2ray
+    v2ray --config /etc/v2ray/config.json
 
     #Call shell
     sh 
