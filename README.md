@@ -1,9 +1,12 @@
 # stronggate
 
-A prxoy gate docker that provide squid http proxy & v2ray Server through a ikev2 vpn connection powered by strongswan.
+A Docker Image provide  prxoy gate server with squid http proxy & v2ray Server through a ikev2 vpn connection powered by strongswan.
 
 By emericlee@gmail.com
 
+Docker hub: https://hub.docker.com/r/emericlee/stronggate/tags
+
+Docker Image name: **emericlee/stronggate**
 
 ## Quick EXAMPLE
 
