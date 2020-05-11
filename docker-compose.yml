@@ -1,10 +1,10 @@
 version: '3'
 
 services:
-  vpnpure:
-    image: emericlee\stronggate
-    hostname: pure
-    container_name: vpnpure
+  stronggate:
+    image: emericlee/stronggate
+    #hostname: pure
+    #container_name: vpnpure
     volumes: 
       - /lib/modules:/lib/modules
       - ./config:/etc/stronggate
@@ -13,6 +13,9 @@ services:
       - ALL            #SYS_ADMIN
     restart: always
     ports:
-      - "20005:3128"   #http proxy(squid http)
-      - "10005:10005"   #v2ray Server
+      - "1080:3128"   #http proxy(squid http)
+      - "1001:10005"   #v2ray Server
     #entrypoint: /entrypoint.sh
+
+# Quick fix ipsec connection
+# docker exec -it vpnpure ipsec up pure
