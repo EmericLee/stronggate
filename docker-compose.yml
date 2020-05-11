@@ -4,7 +4,7 @@ services:
   stronggate:
     image: emericlee/stronggate
     #hostname: pure
-    #container_name: vpnpure
+    container_name: stronggate
     volumes: 
       - /lib/modules:/lib/modules
       - ./config:/etc/stronggate
